@@ -11,6 +11,9 @@ export default defineComponent({
   name: 'App',
   components: {
     HelloWorld
+  },
+  setup() {
+    console.log(1)
   }
 })
 </script>
