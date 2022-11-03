@@ -4,14 +4,17 @@
   <router-link to="/login">登录</router-link>
   <router-link to="/main">首页</router-link>
   <router-view></router-view>
+  <el-button type="primary">确定</el-button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
-
+import { ElButton } from 'element-plus'
+import 'element-plus/theme-chalk/el-button.css'
 export default defineComponent({
   name: 'App',
+  components: { ElButton },
   setup() {
     const store = useStore()
     console.log(store)
