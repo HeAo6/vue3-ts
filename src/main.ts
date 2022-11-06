@@ -13,8 +13,17 @@ registerApp(app)
 app.use(store)
 app.use(router)
 app.mount('#app')
+interface DataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
 
-requestTool.request({
-  url: '/home/multidata',
-  method: 'GET'
-})
+requestTool
+  .request<DataType>({
+    url: '/home/multidata',
+    method: 'GET'
+  })
+  .then((res) => {
+    console.log(res)
+  })

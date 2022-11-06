@@ -8,6 +8,10 @@ const requestTool = new HYRequest({
   //使用接口定义后传入对象形式
   interceptors: {
     requestInterceptor: (config) => {
+      const token = ''
+      if (token) {
+        // config.headers.Autori = `Bearer ${token}`
+      }
       console.log('请求成功的拦截')
       return config
     },
@@ -15,9 +19,9 @@ const requestTool = new HYRequest({
       console.log('请求失败的拦截')
       return err
     },
-    responseInterceptor(config) {
+    responseInterceptor(res) {
       console.log('响应成功的拦截')
-      return config
+      return res.data
     },
     responseInterceptorCatch(err) {
       console.log('响应失败的拦截')
