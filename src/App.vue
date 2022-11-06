@@ -11,7 +11,7 @@
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { ElButton } from 'element-plus'
-import 'element-plus/theme-chalk/el-button.css'
+// import 'element-plus/es/components/button/style/css'
 export default defineComponent({
   name: 'App',
   components: { ElButton },
