@@ -43,9 +43,8 @@ class HYRequest {
     )
     this.instance.interceptors.response.use(
       (res) => {
-        setTimeout(() => {
-          ElLoading.service().close()
-        }, 1000)
+        ElLoading.service().close()
+
         return res
       },
       (err) => {
@@ -55,25 +54,46 @@ class HYRequest {
     )
   }
   //给单独的请求封装拦截器
-  request<T>(config: HYRequestConfig): Promise<T> {
+  request<T = any>(config: HYRequestConfig): Promise<T> {
+    // 1.单个请求对config的处理
+    if (config.interceptors?.requestInterceptor) {
+      config = config.interceptors.requestInterceptor(config)
+    }
+    // 2.判断是否需要loading加载动画
+    if (config.showLoading) {
+      this.showLoading = config.showLoading
+    }
     //从哪里请求就在那里通过.then获取数据
     return new Promise((reslove, reject) => {
-      // 1.单个请求对config的处理
-      if (config.interceptors?.requestInterceptor) {
-        config = config.interceptors.requestInterceptor(config)
-      }
-      // 2.判断是否需要loading加载动画
-      if (config.showLoading) {
-        this.showLoading = config.showLoading
-      }
-      this.instance.request(config).then((res) => {
-        if (config.interceptors?.responseInterceptor) {
-          res = config.interceptors.responseInterceptor(res)
-        }
-        // reslove()
-        console.log(res)
-      })
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            //将请求回来的数据在promise返回出去
+            reslove(res)
+            this.showLoading = true
+          }
+        })
+        .catch((err) => {
+          reject(err)
+          this.showLoading = true
+        })
     })
+  }
+  get<T = any>(config: HYRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'GET' })
+  }
+
+  post<T = any>(config: HYRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'POST' })
+  }
+
+  delete<T = any>(config: HYRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'DELETE' })
+  }
+
+  patch<T = any>(config: HYRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'PATCH' })
   }
 }
 
