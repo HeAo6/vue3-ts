@@ -9,7 +9,14 @@ import {
   ElTabs,
   ElFormItem,
   ElInput,
-  ElLink
+  ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem
 } from 'element-plus'
 const components = [
   ElButton,
@@ -20,7 +27,14 @@ const components = [
   ElTabPane,
   ElFormItem,
   ElInput,
-  ElLink
+  ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem
 ]
 //通过便利注册所有的组件全集
 export function registerApp(app: App): void {
