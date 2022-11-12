@@ -1,32 +1,31 @@
-//service出口
+// service统一出口
 import HYRequest from './request'
 import { BASE_URL, TIME_OUT } from './request/config'
-//拿到实例进行默认导出
-const requestTool = new HYRequest({
+
+import localCache from '@/utils/cache'
+
+const hyRequest = new HYRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
-  //使用接口定义后传入对象形式
   interceptors: {
     requestInterceptor: (config) => {
-      const token = ''
-      if (token) {
-        // config.headers.Autori = `Bearer ${token}`
+      // 携带token的拦截
+      const token = localCache.getCache('token')
+      if (token && config.headers) {
+        config.headers.Authorization = `Bearer ${token}`
       }
-      console.log('请求成功的拦截')
       return config
     },
-    requestInterceptorCatch(err) {
-      console.log('请求失败的拦截')
+    requestInterceptorCatch: (err) => {
       return err
     },
-    responseInterceptor(res) {
-      console.log('响应成功的拦截')
-      return res.data
+    responseInterceptor: (res) => {
+      return res
     },
-    responseInterceptorCatch(err) {
-      console.log('响应失败的拦截')
+    responseInterceptorCatch: (err) => {
       return err
     }
   }
 })
-export default requestTool
+
+export default hyRequest
