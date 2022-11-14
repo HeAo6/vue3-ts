@@ -12,5 +12,12 @@ module.exports = {
         changeOrigin: true
       }
     }
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        views: '@/views'
+      }
+    }
   }
 }

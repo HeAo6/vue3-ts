@@ -1,5 +1,6 @@
 import 'element-plus/dist/index.css'
 import { App } from 'vue'
+import { Fold, Expand } from '@element-plus/icons-vue'
 import {
   ElButton,
   ElAlert,
@@ -16,7 +17,10 @@ import {
   ElMain,
   ElMenu,
   ElSubMenu,
-  ElMenuItem
+  ElMenuItem,
+  ElIcon,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 } from 'element-plus'
 const components = [
   ElButton,
@@ -34,7 +38,12 @@ const components = [
   ElMain,
   ElMenu,
   ElSubMenu,
-  ElMenuItem
+  ElMenuItem,
+  ElIcon,
+  Fold,
+  Expand,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 ]
 //通过便利注册所有的组件全集
 export function registerApp(app: App): void {

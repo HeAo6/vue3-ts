@@ -8,19 +8,24 @@ const routes: RouteRecordRaw[] = [
     redirect: '/main'
   },
   {
+    name: 'login',
     path: '/login',
     component: () => import('@/views/login/index.vue')
   },
   {
+    name: 'main',
     path: '/main',
     component: () => import('@/views/main/index.vue')
-  }
+    // children: []
+  },
+  { path: '/:pathMatch(.*)*', component: () => import('@/views/not-found/index.vue') }
 ]
 
 const router = createRouter({
   routes,
   history: createWebHashHistory()
 })
+//判断是否携带token守卫
 router.beforeEach((to) => {
   if (to.path !== '/login') {
     const token = localCache.getCache('token')
