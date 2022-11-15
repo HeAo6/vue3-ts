@@ -3,11 +3,7 @@
   <div class="nav-header">
     <el-icon class="icon-fold" v-show="isFold" @click="handleFold"><Fold /></el-icon>
     <el-icon class="icon-fold" v-show="!isFold" @click="handleFold"><Expand /></el-icon>
-    <div>
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/main' }">homepage</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <div></div>
   </div>
 </template>
 

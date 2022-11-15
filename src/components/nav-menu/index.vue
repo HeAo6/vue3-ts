@@ -57,6 +57,8 @@ export default defineComponent({
     const store = useStore()
     const userMenus = computed(() => store.state.loginModule.userMenus)
     const router = useRouter()
+    console.log(props)
+
     const handleMenuClick = (item: any) => {
       router.push({
         path: item.url ?? 'not-found'

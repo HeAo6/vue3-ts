@@ -20,7 +20,9 @@ import {
   ElMenuItem,
   ElIcon,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElRow,
+  ElCol
 } from 'element-plus'
 const components = [
   ElButton,
@@ -43,7 +45,9 @@ const components = [
   Fold,
   Expand,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElRow,
+  ElCol
 ]
 //通过便利注册所有的组件全集
 export function registerApp(app: App): void {
