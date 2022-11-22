@@ -6,6 +6,7 @@
       <span class="title" v-if="!collapse">Coderwhy-CMS</span>
     </div>
     <el-menu
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -43,9 +44,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
+import { useRouter, useRoute } from 'vue-router'
 export default defineComponent({
   props: {
     collapse: {
@@ -57,14 +59,17 @@ export default defineComponent({
     const store = useStore()
     const userMenus = computed(() => store.state.loginModule.userMenus)
     const router = useRouter()
-    console.log(props)
+    const route = useRoute()
+    const currentPath = route.path
+    const menu = pathMapToMenu(userMenus.value, currentPath)
+    const defaultValue = ref(menu.id + '')
 
     const handleMenuClick = (item: any) => {
       router.push({
         path: item.url ?? 'not-found'
       })
     }
-    return { userMenus, handleMenuClick }
+    return { userMenus, handleMenuClick, defaultValue }
   }
 })
 </script>

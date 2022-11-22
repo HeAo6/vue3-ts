@@ -12,6 +12,7 @@ const app = createApp(App)
 registerApp(app)
 // app.use(ElementPlus)
 app.use(store)
+//动态注册 贮存
+setupStore()
 app.use(router)
 app.mount('#app')
-setupStore()

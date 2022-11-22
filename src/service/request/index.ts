@@ -95,7 +95,7 @@ class HYRequest {
           // 2.将showLoading设置true, 这样不会影响下一个请求
           this.showLoading = DEAFULT_LOADING
 
-          // 3.将结果resolve返回出去
+          // 3.将结果resolve返回出去作为then的参数
           resolve(res)
         })
         .catch((err) => {

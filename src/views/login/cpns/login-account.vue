@@ -42,7 +42,7 @@ export default defineComponent({
             localCache.deleteCache('name')
             localCache.deleteCache('password')
           }
-          //开始验证登录
+          // 开始验证登录
           store.dispatch('loginModule/accountLoginAction', { ...account })
         }
       })

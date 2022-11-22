@@ -1,9 +1,11 @@
 import { RouteRecordRaw } from 'vue-router'
+let firstMenu: any = null
+
 //封装映射所有菜单的路由函数
 export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
 
-  //先加载所有的路由
+  //加载所有的路由
   const allRoutes: RouteRecordRaw[] = []
   const routerFile = require.context('../router/main', true, /.ts/)
   routerFile.keys().forEach((path) => {
@@ -21,6 +23,9 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
         if (route) {
           routes.push(route)
         }
+        if (!firstMenu) {
+          firstMenu = menu
+        }
       } else {
         _recurseGetRoute(menu.children)
       }
@@ -30,3 +35,17 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
 
   return routes
 }
+//将刷新后的菜单保存起来
+export function pathMapToMenu(userMenus: any[], currentPath: string): any {
+  for (const menu of userMenus)
+    if (menu.type === 1) {
+      const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
+      if (findMenu) {
+        return findMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+}
+
+export { firstMenu }

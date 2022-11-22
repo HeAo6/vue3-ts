@@ -22,7 +22,10 @@ import {
   ElBreadcrumb,
   ElBreadcrumbItem,
   ElRow,
-  ElCol
+  ElCol,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 } from 'element-plus'
 const components = [
   ElButton,
@@ -47,7 +50,10 @@ const components = [
   ElBreadcrumb,
   ElBreadcrumbItem,
   ElRow,
-  ElCol
+  ElCol,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 ]
 //通过便利注册所有的组件全集
 export function registerApp(app: App): void {
