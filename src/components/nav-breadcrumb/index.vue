@@ -14,6 +14,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup() {
     console.log(1111)
+    console.log(2222)
 
     return {}
   }
